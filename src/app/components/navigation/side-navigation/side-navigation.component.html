@@ -1,0 +1,83 @@
+<div class="side-navigation">
+  <div class="team-display">
+    <div nz-dropdown class="flex width -full items-center clickable" [nzTrigger]="'click'" [nzDropdownMenu]="changeTeam" *ngIf="currentTeam">
+      <div class="flex items-center">
+        <div class="team-image"></div>
+
+        <div>
+          <span>{{ currentTeam.name }}</span>
+          <div class="text -size -tiny color -muted" style="margin-top: -5px;">{{ 'string.click_to_switch_team' | translate }}</div>
+        </div>
+      </div>
+
+      <app-icon [icon]="'chevron-down'" [size]="15"></app-icon>
+    </div>
+  </div>
+
+  <div class="-title color -muted icon-text-level">
+    {{ 'string.menu' | translate }}
+  </div>
+
+  <div class="navigation">
+    <ul>
+      <li [routerLink]="'/dashboard'" [routerLinkActive]="'-active'">
+        <span class="-item" nz-typography>
+          <span class="-border"></span>
+          <app-icon [icon]="'home'" [size]="18"></app-icon> {{ 'string.dashboard' | translate }}
+        </span>
+      </li>
+
+      <li [routerLink]="'/recipes'" [routerLinkActive]="'-active'">
+        <span class="-item" nz-typography>
+          <span class="-border"></span>
+          <app-icon [icon]="'beaker'" [size]="18"></app-icon> {{ 'string.recipes' | translate }}
+        </span>
+      </li>
+
+      <li [routerLink]="'/navigate'" [routerLinkActive]="'-active'">
+        <span class="-item" nz-typography>
+          <span class="-border"></span>
+          <app-icon [icon]="'folder'" [size]="18"></app-icon> {{ 'string.objects' | translate }}
+        </span>
+      </li>
+
+      <li [routerLink]="'/team'" [routerLinkActive]="'-active'">
+        <span class="-item" nz-typography>
+          <span class="-border"></span>
+          <app-icon [icon]="'rocket-launch'" [size]="18"></app-icon> {{ 'string.team' | translate }}
+        </span>
+      </li>
+    </ul>
+  </div>
+
+  <nz-divider></nz-divider>
+
+  <div class="-title color -muted icon-text-level">
+    {{ 'string.favorites' | translate }}
+  </div>
+
+  <span class="color -muted text -size -small" *ngIf="!favorites.length">{{ 'string.no_favorites' | translate }}</span>
+  <div *ngIf="favorites.length">
+    <span *ngFor="let favorite of favorites" class="-recipe">
+      {{ ('recipe.' + favorite.identifier) | translate }}
+
+      <app-icon icon="chevron-right" class="ml-auto" [size]="13"></app-icon>
+    </span>
+  </div>
+
+  <div class="-language">
+    <app-language-selector [floating]="false"></app-language-selector>
+  </div>
+</div>
+
+<nz-dropdown-menu #changeTeam="nzDropdownMenu">
+  <ul nz-menu>
+    <li nz-menu-item *ngFor="let team of teams" (click)="switchTeam(team)">{{ team.name }}</li>
+
+    <nz-divider></nz-divider>
+
+    <li nz-menu-item>
+      <app-icon [icon]="'plus-circle'" [size]="20"></app-icon> {{ 'button.create_team' | translate }}
+    </li>
+  </ul>
+</nz-dropdown-menu>

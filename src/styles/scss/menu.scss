@@ -1,0 +1,277 @@
+menu {
+  background: $color-background-black;
+  border-bottom: 1px solid $color-border;
+  width: 100%;
+  height: 65px;
+  position: fixed;
+  left: 0;
+  margin-top: 0;
+  z-index: 99;
+  display: flex;
+  align-items: center;
+  padding: $padding 30px;
+  box-shadow: 0 2.5px 5px 0 rgba(#000, 0.05);
+
+  .search-container {
+    width: 300px;
+
+    .ant-input-affix-wrapper {
+      border: 0;
+      height: 40px;
+      font-size: 1.2em;
+      box-shadow: none !important;
+      border-radius: $border-radius;
+      background: rgba($color-background-dark, 0.1);
+    }
+
+    .ant-input {
+      padding-left: 10px !important;
+      background: none;
+      color: #FFF;
+    }
+
+    .anticon {
+      color: #FFF;
+    }
+  }
+
+  .logotype-container {
+    width: $menu-width;
+    display: flex;
+    height: 65px;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 30px;
+    cursor: pointer;
+    margin-left: -30px;
+    border-right: 1px solid $color-border-white;
+    margin-right: 15px;
+    background: url("../../assets/graphics/logotype-white.svg") center left 30px no-repeat;
+    background-size: 105px;
+  }
+
+  .wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  .right-menu {
+    margin-left: auto;
+    display: flex;
+
+    .-item {
+      border-left: 1px solid $color-border-white;
+      padding-left: 20px;
+      margin-left: 20px;
+
+      &:first-child {
+        border-left: 0;
+      }
+    }
+
+    .profile-image {
+      width: 30px;
+      height: 30px;
+      border-radius: $border-radius;
+      margin-right: 10px;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center center;
+    }
+
+    .notifications {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #FFF;
+
+      .-display-notification {
+        position: absolute;
+        top: -2px;
+        right: -2.5px;
+        background: $color-success;
+        width: 8px;
+        height: 8px;
+        border-radius: 8px;
+      }
+
+      .-holder {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        margin-left: 20px;
+
+        &:first-child {
+          margin-left: 0;
+        }
+      }
+
+      app-icon {
+        opacity: 0.65;
+        margin-bottom: -5px;
+        color: #FFF;
+      }
+    }
+
+    .-name {
+      font-size: 0.9em;
+      color: #FFF;
+    }
+  }
+}
+
+.side-navigation {
+  background: rgba($color-background-dark, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: $menu-width;
+  height: calc(100vh - 60px);
+  padding: $padding 30px;
+  border-right: 1px solid $color-border;
+  margin-top: 65px;
+
+  .-language {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: $menu-width;
+    border-top: 1px solid $color-border;
+    padding: $padding 30px;
+  }
+
+  .team-display {
+    width: calc(100% + #{30px * 2});
+    display: flex;
+    height: 65px;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 30px;
+    margin-left: -30px;
+    border-bottom: 1px solid $color-border;
+    margin-top: -$padding;
+
+    .team-image {
+      width: 30px;
+      height: 30px;
+      border-radius: $border-radius;
+      background: url("../../assets/graphics/placeholder.svg") center center no-repeat;
+      background-size: cover;
+      margin-right: 10px;
+    }
+
+    app-icon {
+      margin-left: auto;
+      margin-bottom: -7.5px;
+      margin-right: -2.5px;
+    }
+  }
+
+  .navigation {
+    ul {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      width: calc(100% + 30px);
+    }
+
+    .-active {
+      font-weight: 500;
+
+      .-border {
+        background: rgba($color-primary, 1);
+      }
+
+      .-item {
+        background: rgba($color-primary, 0.1);
+        color: $color-primary;
+
+        app-icon {
+          color: $color-primary;
+        }
+      }
+    }
+
+    app-icon {
+      margin-bottom: -5px;
+      margin-right: 10px;
+      color: $color-dark;
+      transition: 0.2s ease-in-out all;
+    }
+
+    .-item {
+      display: flex;
+      align-items: center;
+      color: rgba($color-dark, 0.5);
+      cursor: pointer;
+      transition: 0.2s ease-in-out all;
+      padding: 10px 28px;
+      margin-left: -30px;
+      position: relative;
+      width: calc(100% + 30px);
+
+      .-border {
+        position: absolute;
+        top: 11px;
+        left: 0;
+        height: 20px;
+        width: 3px;
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+      }
+
+      app-icon {
+        color: rgba($color-dark, 0.5);
+      }
+
+      &:hover {
+        color: rgba($color-primary, 0.8);
+
+        app-icon {
+          color: rgba($color-primary, 0.8);
+        }
+      }
+    }
+  }
+
+  .-recipe {
+    font-size: 0.9em;
+    padding: 5px 10px;
+    margin-left: -10px;
+    transition: 0.2s ease-in-out all;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: $border-radius;
+    cursor: pointer;
+
+    app-icon {
+      transition: 0.2s ease-in-out all;
+    }
+
+    &:hover {
+      background: rgba(#000, 0.05);
+    }
+  }
+
+  .-title {
+    font-weight: bold;
+    font-size: 0.85em;
+    display: flex;
+    margin-bottom: 5px;
+    margin-top: 30px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    opacity: 0.8;
+
+    app-icon {
+      margin-right: 5px;
+      margin-bottom: -12px;
+    }
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+}

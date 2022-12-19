@@ -1,0 +1,21 @@
+<div class="page-title">
+  <h4 nz-typography class="mb-none mt-none">{{ 'string.recipes' | translate }}</h4>
+  <button nz-button nzType="primary" class="ml-auto">{{ 'button.create_recipe' | translate }}</button>
+</div>
+
+<div class="page-content">
+  <nz-row [nzGutter]="[10, 10]">
+    <nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="24">
+      <nz-row [nzGutter]="[10, 10]">
+        <nz-col [nzXs]="24" [nzSm]="24" [nzMd]="6" [nzLg]="6" *ngFor="let recipe of recipes">
+          <app-recipe-card [recipe]="recipe"></app-recipe-card>
+        </nz-col>
+
+        <nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="24" [hidden]="!recipesLoading">
+          <ng-template #indicatorTemplate><i nz-icon nzType="loading"></i></ng-template>
+          <nz-spin nzSimple [nzIndicator]="indicatorTemplate"></nz-spin>
+        </nz-col>
+      </nz-row>
+    </nz-col>
+  </nz-row>
+</div>

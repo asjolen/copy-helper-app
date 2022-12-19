@@ -1,0 +1,8 @@
+<div class="block width -full {{ flex ? 'flex items-center justify-center' : '' }}">
+  <div class="-item" *ngFor="let profile of users.slice(0, displayCount)" nz-tooltip="true" [nzTooltipTitle]="profile.name"
+       [ngStyle]="{'background-image': 'url(' + profile.picture + ')'}"></div>
+
+  <div class="-item" *ngIf="users.length > displayCount">
+    +{{(users.length - displayCount)}}
+  </div>
+</div>

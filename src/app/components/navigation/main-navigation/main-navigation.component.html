@@ -1,0 +1,42 @@
+<menu class="menu">
+  <ng-container *ngTemplateOutlet="container"></ng-container>
+</menu>
+
+<ng-template #container>
+  <div class="logotype-container"></div>
+
+  <div class="search-container">
+    <nz-input-group [nzPrefix]="prefixTemplateUser">
+      <input type="text" nzSize="large" nz-input [placeholder]="'string.search_for_anything' | translate" />
+    </nz-input-group>
+
+    <ng-template #prefixTemplateUser><span nz-icon nzType="search" class="color -muted"></span></ng-template>
+  </div>
+
+  <div class="right-menu" *ngIf="user">
+    <div class="-item notifications">
+      <div class="-holder clickable">
+        <app-icon icon="cog-6-tooth"></app-icon>
+      </div>
+
+      <div class="-holder clickable">
+        <span class="-display-notification"></span>
+        <app-icon icon="bell"></app-icon>
+      </div>
+    </div>
+
+    <div class="-item">
+      <div class="flex items-center clickable" nz-dropdown [nzTrigger]="'click'" [nzDropdownMenu]="profileDropdown">
+        <div class="profile-image" [ngStyle]="{'background-image': 'url(' + user.picture + ')'}"></div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<nz-dropdown-menu #profileDropdown="nzDropdownMenu">
+  <ul nz-menu>
+    <li nz-menu-item (click)="userService.logout()">
+      <app-icon [icon]="'arrow-left-on-rectangle'"></app-icon> {{ 'string.sign_out' | translate }}
+    </li>
+  </ul>
+</nz-dropdown-menu>

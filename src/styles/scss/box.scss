@@ -1,0 +1,7 @@
+.box {
+  &.-info {
+    padding: 10px 15px;
+    border: 1px dashed $color-border;
+    border-radius: $border-radius;
+  }
+}

@@ -1,0 +1,48 @@
+.ant-typography {
+  color: $color-text;
+}
+
+.text {
+  color: $color-text;
+
+  &.-size {
+    &.-huge {
+      font-size: 2em;
+    }
+
+    &.-large {
+      font-size: 1.4em;
+    }
+
+    &.-small {
+      font-size: 0.9em;
+    }
+
+    &.-tiny {
+      font-size: 0.85em;
+    }
+  }
+}
+
+.color {
+  &.-white {color: #FFF}
+  &.-muted {color: rgba(#000, 0.5)}
+  &.-disabled {color: rgba(#000, 0.25)}
+}
+
+.overflow-ellipsis {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 100%;
+}
+
+.icon-text-level {
+  app-icon {
+    margin-bottom: -5px;
+  }
+}
+
+label {
+  user-select: none;
+}

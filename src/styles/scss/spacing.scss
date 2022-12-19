@@ -1,0 +1,28 @@
+
+.m {
+  &b {
+    &-none {
+      margin-bottom: 0 !important;
+    }
+  }
+
+  &t {
+    &-none {
+      margin-top: 0 !important;
+    }
+  }
+}
+
+.p {
+  &b {
+    &-none {
+      padding-bottom: 0 !important;
+    }
+  }
+
+  &t {
+    &-none {
+      padding-bottom: 0 !important;
+    }
+  }
+}

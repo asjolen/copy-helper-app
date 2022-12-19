@@ -1,0 +1,94 @@
+<div class="full-screen-content">
+  <div class="auth">
+    <div class="-item">
+      <div class="-content">
+        <div class="center mb3">
+          <div class="logotype"></div>
+
+          <h2 class="mt2 mb0" nz-typography [hidden]="fetching">{{ 'string.welcome' | translate }}</h2>
+          <span nz-typography class="text color -muted block mb2" [hidden]="fetching">{{ 'string.we_need_your_details' | translate }}</span>
+
+          <div *ngIf="fetching" class="p2 mt3">
+            <ng-template #indicatorTemplate><i nz-icon nzType="loading"></i></ng-template>
+            <nz-spin nzSimple [nzIndicator]="indicatorTemplate"></nz-spin>
+          </div>
+
+          <div *ngIf="!fetching">
+            <div *ngIf="!hasDetails.user">
+              <form nz-form [formGroup]="userForm" (ngSubmit)="saveUserDetails()">
+                <nz-row [nzGutter]="[10, 10]">
+                  <nz-col [nzXs]="24" [nzSm]="24" [nzMd]="12" [nzLg]="12">
+                    <input nz-input formControlName="givenName" [placeholder]="'string.given_name' | translate">
+                  </nz-col>
+
+                  <nz-col [nzXs]="24" [nzSm]="24" [nzMd]="12" [nzLg]="12">
+                    <input nz-input formControlName="familyName" [placeholder]="'string.family_name' | translate">
+                  </nz-col>
+
+                  <nz-col [nzXs]="24" [nzSm]="24" [nzMd]="12" [nzLg]="12">
+                    <span class="left color -muted clickable" (click)="logout()">{{ 'button.sign_out' | translate }}</span>
+                  </nz-col>
+
+                  <nz-col [nzXs]="24" [nzSm]="24" [nzMd]="12" [nzLg]="12">
+                    <button nz-button class="right" nzType="primary" [disabled]="userForm.invalid" [nzLoading]="loading" (click)="saveUserDetails()">
+                      {{ ((!hasDetails.team || !hasDetails.organization) ? 'button.next' : 'button.save') | translate }}
+                    </button>
+                  </nz-col>
+                </nz-row>
+              </form>
+            </div>
+
+            <div *ngIf="hasDetails.user && !hasDetails.organization">
+              <form nz-form [formGroup]="organizationForm" (ngSubmit)="saveOrganizationDetails()">
+                <h5 nz-typography>{{ 'string.your_organization' | translate }}</h5>
+
+                <nz-row [nzGutter]="[10, 10]">
+                  <nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="24">
+                    <input nz-input formControlName="name" [placeholder]="'string.organization_name' | translate">
+                  </nz-col>
+
+                  <nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="24">
+                    <input nz-input formControlName="website" [placeholder]="'string.website' | translate">
+                  </nz-col>
+
+                  <nz-col [nzXs]="24" [nzSm]="24" [nzMd]="12" [nzLg]="12">
+                    <span class="left color -muted clickable" (click)="logout()">{{ 'button.sign_out' | translate }}</span>
+                  </nz-col>
+
+                  <nz-col [nzXs]="24" [nzSm]="24" [nzMd]="12" [nzLg]="12">
+                    <button nz-button class="right" nzType="primary" [disabled]="organizationForm.invalid" [nzLoading]="loading" (click)="saveOrganizationDetails()">
+                      {{ ((!hasDetails.team) ? 'button.next' : 'button.save') | translate }}
+                    </button>
+                  </nz-col>
+                </nz-row>
+              </form>
+            </div>
+
+            <div *ngIf="hasDetails.user && hasDetails.organization && !hasDetails.team">
+              <form nz-form [formGroup]="teamForm" (ngSubmit)="saveTeamDetails()">
+                <h5 nz-typography>{{ 'string.create_team' | translate }}</h5>
+
+                <nz-row [nzGutter]="[10, 10]">
+                  <nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="24">
+                    <input nz-input formControlName="name" [placeholder]="'string.name' | translate">
+                  </nz-col>
+
+                  <nz-col [nzXs]="24" [nzSm]="24" [nzMd]="12" [nzLg]="12">
+                    <span class="left color -muted clickable" (click)="logout()">{{ 'button.sign_out' | translate }}</span>
+                  </nz-col>
+
+                  <nz-col [nzXs]="24" [nzSm]="24" [nzMd]="12" [nzLg]="12">
+                    <button nz-button class="right" nzType="primary" [disabled]="teamForm.invalid" [nzLoading]="loading" (click)="saveTeamDetails()">
+                      {{ 'button.save' | translate }}
+                    </button>
+                  </nz-col>
+                </nz-row>
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+<a class="language-selector -floating" nz-dropdown [nzDropdownMenu]="languageSelector" *ngIf="floating"
+     [ngStyle]="{'background-image': 'url(' + flagUrl + ')'}" [nzTrigger]="'click'">
+</a>
+
+<a class="language-selector" nz-dropdown [nzDropdownMenu]="languageSelector" *ngIf="!floating" [nzTrigger]="'click'">
+  <div class="-flag" [ngStyle]="{'background-image': 'url(' + flagUrl + ')'}"></div>
+  <span>{{ getLanguageName("SE") }}</span>
+</a>
+
+<nz-dropdown-menu #languageSelector="nzDropdownMenu">
+  <ul nz-menu>
+    <li nz-menu-item *ngFor="let language of languages">
+      <nz-avatar [nzSize]="18"  [nzSrc]="getCountryFlag(findByKey(language).name.common)" style="margin-right: 10px"></nz-avatar> {{ getLanguageName(language) }}
+    </li>
+  </ul>
+</nz-dropdown-menu>

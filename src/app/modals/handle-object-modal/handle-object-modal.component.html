@@ -1,0 +1,37 @@
+<nz-modal [(nzVisible)]="visible" (nzOnCancel)="closeModal()" [nzFooter]="null">
+  <div *nzModalContent>
+    <div *ngIf="type">
+      <h3 nz-typography class="mt-none mb-none mb-0 mb0">{{ objectService.findObjectType(type).string | translate }}</h3>
+
+      <nz-divider></nz-divider>
+
+      <form nz-form [formGroup]="form">
+        <nz-row [nzGutter]="[10, 0]">
+          <nz-col [nzLg]="16">
+            <nz-form-item class="mb1">
+              <nz-form-control nzErrorTip="{{ 'string.fill_field' | translate }}">
+                <nz-input-group>
+                  <input type="text" nz-input formControlName="name" placeholder="{{ 'string.name' | translate }}" />
+                </nz-input-group>
+              </nz-form-control>
+            </nz-form-item>
+          </nz-col>
+
+          <nz-col [nzLg]="8">
+            <nz-form-item>
+              <app-folder-selector class="block width -full" (selectedFolder)="selectFolder($event)"></app-folder-selector>
+            </nz-form-item>
+          </nz-col>
+
+          <nz-divider class="mt-none"></nz-divider>
+
+          <nz-col [nzLg]="24">
+            <button [disabled]="form.invalid" [nzLoading]="loading" nz-button class="right" [nzType]="'primary'" (click)="createFolder()">
+              {{ 'button.save' | translate }}
+            </button>
+          </nz-col>
+        </nz-row>
+      </form>
+    </div>
+  </div>
+</nz-modal>

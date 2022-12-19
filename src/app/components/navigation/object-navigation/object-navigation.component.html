@@ -1,0 +1,104 @@
+<nz-row [nzGutter]="[10, 10]" class="">
+  <nz-col [nzXs]="24" [nzMd]="24" [nzLg]="24" *ngIf="(numberService.isNumericValue(currentId) && isDragging) || breadCrumbArray.length">
+    <div *ngIf="!isDragging">
+      <nz-card style="padding: 10px">
+          <span class="left" style="margin-top: -2px">
+            <span class="breadcrumb" *ngIf="breadCrumbArray.length" (click)="goToBreadCrumb(null, true)">
+              <span class="flex items-center">
+                <span style="margin-right: 2.5px;">{{ 'string.root' | translate }}</span>
+              </span>
+            </span>
+
+            <span class="breadcrumb" *ngFor="let breadcrumb of breadCrumbArray; let last = last" (click)="goToBreadCrumb(breadcrumb, false)">
+              <span class="flex items-center">
+                <span style="margin-right: 2.5px;">/ {{ breadcrumb.name }}</span>
+              </span>
+            </span>
+          </span>
+      </nz-card>
+    </div>
+
+    <div *ngIf="numberService.isNumericValue(currentId) && isDragging">
+      <div class="drop-to-root" mwlDroppable (drop)="objectDropped($event, getParentObject())">
+        <app-icon [icon]="'arrow-left'" class="mr1"></app-icon>
+        {{ 'string.move_to_parent_folder' | translate }}
+      </div>
+    </div>
+  </nz-col>
+
+  <nz-col class="mb-4 mt-4 block"></nz-col>
+</nz-row>
+
+
+<div class="relative object-navigator-context-menu">
+  <nz-dropdown-menu #objectNavigatorContextMenu="nzDropdownMenu">
+    <app-new-object-dropdown [visibleItems]="dropdownCreateTypes" [appendToUrl]="appendFolderToUrl()"></app-new-object-dropdown>
+  </nz-dropdown-menu>
+
+  <div class="-content-menu-area" (contextmenu)="contextMenu($event, objectNavigatorContextMenu)"></div>
+
+  <nz-row [nzGutter]="[10, 10]">
+    <!-- Object -->
+    <nz-col mwlDraggable mwlDroppable [ngStyle]="{'z-index': object.zIndex ? object.zIndex : 1}" [dragOverClass]="'dragged-over'"
+            (dragStart)="dragStart(object)" (dragEnd)="dragEnd()" [nzXs]="24" [nzMd]="row ? 6 : 24" [nzLg]="row ? 6 : 24"
+            *ngFor="let object of hideFilteredObjects(filteredObjects)" [hidden]="isLoading || object.hidden || !filterDone"
+            (contextmenu)="contextMenu($event, actionsDropdown)">
+
+      <nz-dropdown-menu #actionsDropdown="nzDropdownMenu">
+        <ul nz-menu>
+          <li nz-menu-item nz-popconfirm class="bg -danger" nzDanger
+              [nzPopconfirmTitle]="'string.are_you_sure' | translate"
+              [nzOkText]="'button.delete' | translate"
+              [nzCancelText]="'button.cancel' | translate"
+              (nzOnConfirm)="deleteObject(object)">
+            <app-icon icon="trash"></app-icon> {{ 'string.delete' | translate }}
+          </li>
+        </ul>
+      </nz-dropdown-menu>
+
+      <nz-card class="clickable card" (click)="openObject(object)" [nzHoverable]="true" [ngStyle]="{'background': '#FFF'}">
+        <div class="draggable-overlay -disabled" *ngIf="isDragging" [hidden]="object.type === objectService.types.folder.id && object.id !== dragObject.id"></div>
+        <div mwlDroppable class="draggable-overlay" (drop)="objectDropped($event, object)" *ngIf="isDragging" [hidden]="object.type !== objectService.types.folder.id"></div>
+        <div class="object-view-card">
+          <div class="-icon -background">
+            <div class="-badge" *ngIf="object.children_count">{{ object.children_count }}</div>
+            <app-icon [icon]="objectService.findObjectType(object.type).icon" [solid]="true"></app-icon>
+          </div>
+
+          <div style="overflow: hidden;">
+            <h4 class="mb-none overflow-ellipsis">{{ object.name }}</h4>
+            <span class="text -size -tiny color -muted block" style="margin-top: 2px">
+              {{ 'string.modified' | translate:{modified: timeService.humanizedDate(object.updated_at)} }}
+            </span>
+          </div>
+        </div>
+      </nz-card>
+
+    </nz-col>
+
+    <!-- Etc -->
+    <nz-col [nzXs]="24" [nzMd]="row ? 6 : 24" [nzLg]="row ? 6 : 24" [hidden]="!isLoading && filterDone" *ngFor="let obj of [].constructor(4)">
+      <nz-card>
+        <div class="object-view-card">
+          <div class="flex items-center">
+            <div class="-icon -background">
+              <ng-template #indicatorTemplate><i nz-icon nzType="loading"></i></ng-template>
+              <nz-spin nzSimple [nzIndicator]="indicatorTemplate"></nz-spin>
+            </div>
+
+            <nz-skeleton-element nzType="input" [nzActive]="true"></nz-skeleton-element>
+          </div>
+        </div>
+      </nz-card>
+    </nz-col>
+
+    <nz-col [nzXs]="24" [nzMd]="24" [nzLg]="24" *ngIf="!hideFilteredObjects(filteredObjects).length && filterDone" [hidden]="isLoading" (contextmenu)="contextMenu($event, objectNavigatorContextMenu)">
+      <nz-card style="padding: 30px; background: none; border: 0">
+        <nz-empty [nzNotFoundContent]="'string.right_click_to_create' | translate"></nz-empty>
+      </nz-card>
+    </nz-col>
+  </nz-row>
+</div>
+
+<app-tip [string]="'string.right_click_to_create_tip'" class="mt2 block" *ngIf="hideFilteredObjects(filteredObjects).length && filterDone"></app-tip>
+<app-handle-object-modal [type]="quickEditObjectModal ? quickEditObjectModal.type : null" [object]="quickEditObjectModal" [visible]="quickEditObjectModal" (visibleChanged)="quickEditObjectModal = $event"></app-handle-object-modal>

@@ -1,0 +1,4 @@
+<nz-select nzMode="tags" class="width -full overflow-hidden" style="text-align: left"
+           [(ngModel)]="userSelect" (ngModelChange)="modelChange($event)" [nzDisabled]="keywordsLoading">
+  <nz-option *ngFor="let option of availableKeywords" [nzLabel]="option.label" [nzValue]="option.value"></nz-option>
+</nz-select>

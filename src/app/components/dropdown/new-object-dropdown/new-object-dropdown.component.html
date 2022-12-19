@@ -1,0 +1,11 @@
+<ul nz-menu>
+  <li nz-menu-item *ngIf="visibleItems.includes('folder')" (click)="createFolderVisible = true">
+    <app-icon icon="folder"></app-icon> {{ 'string.new_folder' | translate }}
+  </li>
+
+  <li nz-menu-item *ngIf="visibleItems.includes('project')">
+    <app-icon icon="document-text"></app-icon> {{ 'string.new_project' | translate }}
+  </li>
+</ul>
+
+<app-handle-object-modal [type]="objectService.types.folder.id" [visible]="createFolderVisible" (visibleChanged)="createFolderVisible = $event"></app-handle-object-modal>

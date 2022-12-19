@@ -1,0 +1,54 @@
+body {
+  background: $color-background;
+  color: $color-text !important;
+}
+
+.layout {
+  min-height: 100vh;
+  background: none !important;
+}
+
+.router-outlet, .wrapper {
+  width: 100%;
+  margin: 0 auto;
+
+  &.-editor {
+    max-width: none;
+    padding: 0;
+  }
+}
+
+.inner-layout {
+  width: calc(100% - #{$menu-width});
+  height: calc(100vh - 65px);
+  margin-left: $menu-width;
+  background: #000 !important;
+  margin-top: 65px;
+  overflow: scroll;
+}
+
+.page-title {
+  height: 65px;
+  display: flex;
+  align-items: center;
+  padding: $padding-layout;
+  border-bottom: 1px solid $color-border;
+}
+
+.page-content {
+  padding: $padding-layout;
+}
+
+.width {
+  &.-full {
+    width: 100%;
+  }
+}
+
+.mb0 {
+  margin-bottom: 0 !important;
+}
+
+.mt0 {
+  margin-top: 0 !important;
+}

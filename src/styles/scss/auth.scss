@@ -1,0 +1,64 @@
+.auth {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+  .logotype {
+    background: url("../../assets/graphics/logotype-icon.svg") center center no-repeat;
+    background-size: contain;
+    width: 100%;
+    height: 40px;
+  }
+
+  .-select-option {
+    width: 100%;
+    height: auto;
+    padding: 15px 20px;
+    border: 1px solid $color-border;
+    border-radius: 4px;
+    font-size: 0.95em;
+    margin-bottom: 15px;
+    cursor: pointer;
+    transition: 0.2s ease-in-out all;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+
+    .-team-logotype {
+      width: 25px;
+      height: 25px;
+      border-radius: 25px;
+      background-size: cover;
+      margin-right: 10px;
+      background: url("../../assets/graphics/placeholder.svg") center center no-repeat;
+      background-size: cover;
+    }
+
+    &:hover {
+      opacity: 0.5;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .-item {
+    height: 100vh;
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .-content {
+      width: 100%;
+      padding: 30px 24px;
+      padding-bottom: 10px;
+      max-width: 400px;
+      background: #FFF;
+      border-radius: $border-radius;
+    }
+  }
+}

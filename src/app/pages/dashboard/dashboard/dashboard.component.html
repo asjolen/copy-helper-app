@@ -1,0 +1,41 @@
+<div class="page-title">
+  <h4 nz-typography class="mb-none mt-none">{{ (isOnObjectNavigation ? 'string.objects' : 'string.dashboard') | translate }}</h4>
+
+  <button nz-button nzType="primary" class="ml-auto">{{ 'button.create_recipe' | translate }}</button>
+</div>
+
+<div class="page-content">
+  <nz-row [nzGutter]="[10, 10]">
+    <nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="24" [hidden]="isOnObjectNavigation">
+      <div class="width -full block flex items-center mb2">
+        <h5 nz-typography class="mb0 mt0">{{ 'string.recipe' | translate }}</h5>
+        <div class="ml-auto">
+          <button nz-button [routerLink]="'/recipes'">{{ 'button.show_all' | translate }}</button>
+        </div>
+      </div>
+
+      <nz-row [nzGutter]="[10, 10]">
+        <nz-col [nzXs]="24" [nzSm]="24" [nzMd]="6" [nzLg]="6" *ngFor="let recipe of recipes | slice:0:4">
+          <app-recipe-card [recipe]="recipe"></app-recipe-card>
+        </nz-col>
+
+        <nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="24" [hidden]="!recipesLoading">
+          <ng-template #indicatorTemplate><i nz-icon nzType="loading"></i></ng-template>
+          <nz-spin nzSimple [nzIndicator]="indicatorTemplate"></nz-spin>
+        </nz-col>
+      </nz-row>
+
+      <nz-divider></nz-divider>
+    </nz-col>
+
+    <nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="24">
+      <div class="mb2">
+        <h5 nz-typography *ngIf="!isOnObjectNavigation" class="mt0 mb0">{{ 'string.objects' | translate }}</h5>
+      </div>
+
+      <app-object-navigation [objects]="teamObjects" [extra]="teamObjectsExtra" [isLoading]="objectsLoading"
+                             [dropdownCreateTypes]="contextValues" (emitChange)="checkRoute()">
+      </app-object-navigation>
+    </nz-col>
+  </nz-row>
+</div>

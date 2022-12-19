@@ -1,0 +1,47 @@
+<button nz-button nz-dropdown nzTrigger="click" [nzDropdownMenu]="folderSelect" class="width -full overflow-hidden flex items-center" style="text-align: left">
+  <app-icon icon="folder" style="margin-right: 5px; margin-bottom: -5px;"></app-icon> {{ appendText }} {{ selectedFolderName ? selectedFolderName : ('string.root' | translate) }}
+</button>
+
+<nz-dropdown-menu  #folderSelect="nzDropdownMenu">
+  <ul nz-menu>
+    <span *ngFor="let obj of folders" [hidden]="selfObject && selfObject.id === obj.id">
+      <li nz-menu-item (click)="removeSelection()" *ngIf="obj.remove">
+        <app-icon icon="folder"></app-icon> {{ obj.name }}
+      </li>
+
+      <span *ngIf="!obj.children && !obj.remove">
+        <li nz-menu-item (click)="selectFolder(obj.id)">
+          <app-icon icon="folder"></app-icon> {{ obj.name }}
+        </li>
+      </span>
+
+      <span *ngIf="obj.children && !obj.remove">
+        <ng-template #titleTemplate>
+          <span class="flex items-center">
+            <app-icon icon="folder" style="margin-right: 5px; margin-bottom: -5px;"></app-icon> {{ obj.name }}
+          </span>
+        </ng-template>
+
+        <li nz-submenu [nzTitle]="titleTemplate" (click)="selectFolder(obj.id)">
+          <ng-container *ngTemplateOutlet="recursiveListTmpl; context:{ list: obj.children }"></ng-container>
+        </li>
+
+        <ng-template #recursiveListTmpl let-list="list">
+          <ul *ngFor="let item of list" [hidden]="selfObject && selfObject.id === item.id">
+            <li nz-menu-item *ngIf="!item.children" (click)="selectFolder(item.id)">
+              <app-icon icon="folder"></app-icon> {{ item.name }}
+            </li>
+
+            <ng-template #titleTemplate>
+              <app-icon icon="folder"></app-icon> {{ item.name }}
+            </ng-template>
+
+            <li nz-submenu *ngIf="item.children" [nzTitle]="titleTemplate" (click)="selectFolder(item.id)">
+              <ng-container *ngTemplateOutlet="recursiveListTmpl; context:{ list: item.children }"></ng-container>
+            </li>
+          </ul>
+        </ng-template>
+      </span>
+    </span>
+  </ul>
+</nz-dropdown-menu>

@@ -1,0 +1,10 @@
+<nz-card class="relative">
+  <div class="-favorite clickable {{ recipe.favorite ? '-favorited' : '' }}" (click)="favorite()"><app-icon [icon]="recipe.favorite ? 'star-solid' : 'star'" [size]="15"></app-icon></div>
+
+  <h5 nz-typography>{{ 'recipe.' + recipe.identifier | translate }}</h5>
+  <span nz-typography class="color -muted">{{ 'recipe.' + recipe.identifier + '_description' | translate }}</span>
+  <button nz-button class="width -full mt2 ant-flex-button" (click)="goToRecipe()">
+    {{ 'button.use_recipe' | translate }}
+    <app-icon icon="arrow-right" class="ml1" [size]="16"></app-icon>
+  </button>
+</nz-card>

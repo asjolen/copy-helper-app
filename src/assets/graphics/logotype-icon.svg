@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="87px" height="87px" viewBox="0 0 87 87" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Group 2</title>
+    <g id="Brand" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Extra-Small" transform="translate(-348.000000, -207.000000)">
+            <g id="Group-2" transform="translate(348.000000, 207.000000)">
+                <rect id="Rectangle" fill="#FE774F" x="0" y="0" width="87" height="87" rx="8"></rect>
+                <g id="Group" transform="translate(18.643526, 13.402969)" fill="#FFFFFF">
+                    <path d="M18.3564737,19.5970306 L28.3564737,19.5970306 L28.3564737,19.5970306 L28.3564737,52.5970306 C28.3564737,56.4630238 25.2224669,59.5970306 21.3564737,59.5970306 L11.3564737,59.5970306 L11.3564737,59.5970306 L11.3564737,26.5970306 C11.3564737,22.7310373 14.4904804,19.5970306 18.3564737,19.5970306 Z" id="Rectangle" transform="translate(19.856474, 39.597031) rotate(-43.000000) translate(-19.856474, -39.597031) "></path>
+                    <path d="M16.7723835,6.24148596 L34.7723835,6.24148596 C38.6383767,6.24148596 41.7723835,9.37549272 41.7723835,13.241486 L41.7723835,16.241486 C41.7723835,20.1074792 38.6383767,23.241486 34.7723835,23.241486 L23.7723835,23.241486 C19.9063902,23.241486 16.7723835,20.1074792 16.7723835,16.241486 L16.7723835,6.24148596 L16.7723835,6.24148596 Z" id="Rectangle" opacity="0.801176525" transform="translate(29.272383, 14.741486) rotate(-43.000000) translate(-29.272383, -14.741486) "></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
